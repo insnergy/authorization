@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">sample</string>
+    <string name="delete_message">delete or not</string>
+    <string name="delete_yes">Yes</string>
+    <string name="delete_no">No!!!</string>
+
+    <string-array name="statistic_type">
+        <item>Hour</item>
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
+</resources>
