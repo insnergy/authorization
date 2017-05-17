@@ -5,7 +5,6 @@
     <string name="delete_no">No!!!</string>
 
     <string-array name="statistic_type">
-        <item>Hour</item>
         <item>Day</item>
         <item>Week</item>
         <item>Month</item>

@@ -7,38 +7,36 @@ import com.google.gson.annotations.SerializedName;
 
 public class DeviceStatistics {
     private String dev_id;
-    private DeviceInfo.WidgetAttr attributes = DeviceInfo.WidgetAttr.KWH;
-    private Statistics_Type stats_type;
+    private DeviceInfo.WidgetAttr attributes = DeviceInfo.WidgetAttr.ACTIVE_POWER;
+    private StatType stats_type;
     private String start_time;
     private String end_time;
 
-    public enum Statistics_Type {
-        @SerializedName("Q")
-        Q,
-        @SerializedName("H")
-        H,
-        @SerializedName("D")
-        D,
-        @SerializedName("W")
-        W,
-        @SerializedName("M")
-        M,
-        @SerializedName("Y")
-        Y;
+    public enum StatType {
+        @SerializedName("dm60")
+        Day("dm60"), //不可查詢超過24小時的範圍
+        @SerializedName("dm1w")
+        Week("dm1w"), //不可查詢超過31天的範圍
+        @SerializedName("dm1m")
+        Month("dm1m"); //不可查詢超過6週的範圍
 
-        public static Statistics_Type getEnum(String type) {
-            switch (type) {
-                case "Hour":
-                    return H;
-                case "Day":
-                    return D;
-                case "Week":
-                    return W;
-                case "Month":
-                    return M;
-                default:
-                    return H;
+        private String code;
+
+        StatType(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return this.code;
+        }
+
+        public static StatType getEnum(String type) {
+            for(StatType stat : values() ) {
+                if (stat.name().equalsIgnoreCase(type)) {
+                    return stat;
+                }
             }
+            return Day;
         }
     }
 
@@ -60,11 +58,11 @@ public class DeviceStatistics {
         this.attributes = attributes;
     }
 
-    public Statistics_Type getStats_type() {
+    public StatType getStats_type() {
         return stats_type;
     }
 
-    public void setStats_type(Statistics_Type stats_type) {
+    public void setStats_type(StatType stats_type) {
         this.stats_type = stats_type;
     }
 
